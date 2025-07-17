@@ -7,6 +7,7 @@ use App\Http\Controllers\ViewController;
 use App\Http\Controllers\GetstartedController;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
@@ -18,6 +19,10 @@ Route::get('/notre-societe', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'ensure.userinfo'])->name('dashboard');
 
 
 
@@ -78,10 +83,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/systeme/statuses-delete', [PostController::class, 'delete_status'])->name('statuses.destroy');
     Route::post('/systeme/statuses-update', [PostController::class, 'update_status'])->name('statuses.update');
 
-
     Route::get('/Getstarted', [GetstartedController::class, 'create'])->name('Getstarted.create');
     Route::post('/Getstarted', [GetstartedController::class, 'store'])->name('Getstarted.store');
+    
     
 });
 
 require __DIR__.'/auth.php';
+

@@ -31,6 +31,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'type' => ['required', 'string', 'in:client,candidat'],
+            'type_client' => ['string', 'in:particulier,entreprise'],
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', 'min:8', Rules\Password::defaults()],
@@ -43,7 +44,14 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        $user->assignRole($request->type);
+        if($request->type == 'client'){
+             $user->assignRole($request->type_client);
+        }
+        else {
+            $user->assignRole($request->type);
+        }
+
+       
 
         event(new Registered($user));
 

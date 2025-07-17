@@ -29,92 +29,127 @@
 
             <form id="formAuthentication" class="mb-6" action="{{ route('register') }}" method="POST">
                 @csrf
-                <div class="row">
-                    <div class="col-md mb-md-0 mb-6">
-                    <div class="form-check custom-option custom-option-basic">
-                        <label class="form-check-label custom-option-content" for="customRadioTemp1">
-                        <input name="type" class="form-check-input" type="radio" value="candidat" id="customRadioTemp1" checked />
-                        <span class="custom-option-header p-0">
-                            <span class="h6 mb-0">Candidat</span>
-                            <small class="text-body-secondary"></small>
-                        </span>
-                        </label>
+                
+                <!-- User Type Selection - Improved alignment -->
+                <div class="row mb-4">
+                    <div class="col-md-6 mb-3">
+                        <div class="form-check custom-option custom-option-basic h-100">
+                            <label class="form-check-label custom-option-content d-flex align-items-center h-100" for="customRadioTemp1">
+                                <input name="type" class="form-check-input" type="radio" value="candidat" id="customRadioTemp1" checked />
+                                <span class="custom-option-header p-0">
+                                    <span class="h6 mb-0">Candidat</span>
+                                    <small class="text-body-secondary"></small>
+                                </span>
+                            </label>
+                        </div>
                     </div>
-                    </div>
-                    <div class="col-md">
-                    <div class="form-check custom-option custom-option-basic mb-6">
-                        <label class="form-check-label custom-option-content" for="customRadioTemp2">
-                        <input name="type" class="form-check-input" type="radio" value="client" id="customRadioTemp2" />
-                        <span class="custom-option-header p-0">
-                            <span class="h6 mb-0">Client</span>
-                            <small class="text-body-secondary"></small>
-                        </span>
-                        </label>
-                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <div class="form-check custom-option custom-option-basic h-100">
+                            <label class="form-check-label custom-option-content d-flex align-items-center h-100" for="radioClient">
+                                <input name="type" class="form-check-input" type="radio" value="client" id="radioClient" />
+                                <span class="custom-option-header p-0">
+                                    <span class="h6 mb-0">Client</span>
+                                </span>
+                            </label>
+                        </div>
                     </div>
                 </div>
+
+                <div id="clientTypeContainer" style="display: none;">
+                  <div class="row mb-4">
+                    <div class="col-md-6 mb-3">
+                        <div class="form-check custom-option custom-option-basic h-100">
+                            <label class="form-check-label custom-option-content d-flex align-items-center h-100" for="customRadioTemp1">
+                                <input name="type_client" class="form-check-input" type="radio" value="entreprise" id="customRadioTemp1" checked />
+                                <span class="custom-option-header p-0">
+                                    <span class="h6 mb-0">Entreprise</span>
+                                    <small class="text-body-secondary"></small>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <div class="form-check custom-option custom-option-basic h-100">
+                            <label class="form-check-label custom-option-content d-flex align-items-center h-100" for="radioClient">
+                                <input name="type_client" class="form-check-input" type="radio" value="particulier" id="radioClient" />
+                                <span class="custom-option-header p-0">
+                                    <span class="h6 mb-0">Particulier</span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                <!-- Client Type Dropdown - Better positioned -->
+                
+
+                <!-- Email and Name Row - Improved spacing -->
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="mb-6 form-control-validation">
+                        <div class="mb-4 form-control-validation">
                             <label for="email" class="form-label">Votre adresse Email</label>
                             <input type="text" class="form-control" id="email" name="email" placeholder="Entrez votre email" required/>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="mb-6 form-control-validation">
+                        <div class="mb-4 form-control-validation">
                             <label for="name" class="form-label">Votre nom complet</label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="Entrez votre nom" required/>
                         </div>
                     </div>
                 </div>
+
+                <!-- Password Row - Improved spacing -->
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="mb-6 form-password-toggle form-control-validation">
+                        <div class="mb-4 form-password-toggle form-control-validation">
                             <label class="form-label" for="password">Mot de passe</label>
                             <div class="input-group input-group-merge">
-                            <input
-                                type="password"
-                                id="password"
-                                class="form-control"
-                                required
-                                name="password"
-                                placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                aria-describedby="password" />
-                            <span class="input-group-text cursor-pointer"><i class="icon-base ti tabler-eye-off"></i></span>
+                                <input
+                                    type="password"
+                                    id="password"
+                                    class="form-control"
+                                    required
+                                    name="password"
+                                    placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                    aria-describedby="password" />
+                                <span class="input-group-text cursor-pointer"><i class="icon-base ti tabler-eye-off"></i></span>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="mb-6 form-password-toggle form-control-validation">
+                        <div class="mb-4 form-password-toggle form-control-validation">
                             <label class="form-label" for="password_confirmation">Confirmation du mot de passe</label>
                             <div class="input-group input-group-merge">
-                            <input
-                                type="password"
-                                id="password_confirmation"
-                                class="form-control"
-                                required
-                                name="password_confirmation"
-                                placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                aria-describedby="password_confirmation" />
-                            <span class="input-group-text cursor-pointer"><i class="icon-base ti tabler-eye-off"></i></span>
+                                <input
+                                    type="password"
+                                    id="password_confirmation"
+                                    class="form-control"
+                                    required
+                                    name="password_confirmation"
+                                    placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                    aria-describedby="password_confirmation" />
+                                <span class="input-group-text cursor-pointer"><i class="icon-base ti tabler-eye-off"></i></span>
                             </div>
                         </div>
                     </div>
                 </div>
               
-              
-              
-              
-              <div class="mb-6 mt-8">
-                <div class="form-check mb-8 ms-2">
-                  <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms" required/>
-                  <label class="form-check-label" for="terms-conditions">
-                  J'accepte 
-                    <a href="javascript:void(0);">la politique de confidentialité et les conditions générales.</a>
-                  </label>
+                <!-- Terms and Conditions -->
+                <div class="mb-4 mt-4">
+                    <div class="form-check mb-4 ms-2">
+                        <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms" required/>
+                        <label class="form-check-label" for="terms-conditions">
+                            J'accepte 
+                            <a href="javascript:void(0);">la politique de confidentialité et les conditions générales.</a>
+                        </label>
+                    </div>
                 </div>
-              </div>
-              <button class="btn btn-primary d-grid w-100">S'inscrire</button>
+                
+                <button class="btn btn-primary d-grid w-100">S'inscrire</button>
             </form>
 
             <p class="text-center">
@@ -129,4 +164,43 @@
         <!-- /Register -->
       </div>
     </div>
+
+    <!-- JavaScript for handling Client Type selection -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const clientRadio = document.getElementById('radioClient');
+        const candidatRadio = document.getElementById('customRadioTemp1');
+        const clientTypeContainer = document.getElementById('clientTypeContainer');
+        const clientTypeItems = document.querySelectorAll('.client-type-item');
+        const clientTypeInput = document.getElementById('client_type');
+        const dropdownButton = document.getElementById('dropdownClientType');
+
+        // Show/hide client type dropdown based on radio selection
+        clientRadio.addEventListener('change', function() {
+            if (this.checked) {
+                clientTypeContainer.style.display = 'block';
+            }
+        });
+
+        candidatRadio.addEventListener('change', function() {
+            if (this.checked) {
+                clientTypeContainer.style.display = 'none';
+                clientTypeInput.value = '';
+                dropdownButton.textContent = 'Sélectionnez le type';
+            }
+        });
+
+        // Handle dropdown item selection
+        clientTypeItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const value = this.getAttribute('data-value');
+                const text = this.textContent;
+                
+                clientTypeInput.value = value;
+                dropdownButton.textContent = text;
+            });
+        });
+    });
+    </script>
 </x-app-layout>

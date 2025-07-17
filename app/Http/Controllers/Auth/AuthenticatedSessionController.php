@@ -32,8 +32,8 @@ class AuthenticatedSessionController extends Controller
                 'message' => 'Connexion réussie ! Redirection...',
                 'redirect' => route('dashboard', absolute: false)
             ]);
+        
         }
-
         return redirect()->intended(route('dashboard', absolute: false));
     }
 

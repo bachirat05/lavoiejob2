@@ -1,4 +1,5 @@
 import './bootstrap';
+import './client_dropdown';
 
 import Alpine from 'alpinejs';
 

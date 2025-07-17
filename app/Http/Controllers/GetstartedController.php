@@ -29,8 +29,8 @@ class GetstartedController extends Controller
         'city' => 'nullable|string|max:255',
         'address' => 'nullable|string|max:500',     
     ]);
-
     
+
 
     return response()->json([
                 'message' => 'Rôle mis à jour avec succès.',
