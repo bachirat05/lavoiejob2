@@ -5,7 +5,13 @@ use App\Http\Controllers\CheckController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ViewController;
 use App\Http\Controllers\GetstartedController;
+use App\Http\Controllers\GetstartedEntrController;
+use App\Http\Controllers\GetstartedcandidatController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use App\Models\UserInfo;
+use App\Models\Entreprise;
+use Spatie\Permission\Traits\HasRoles;
 
 
 Route::get('/', function () {
@@ -16,15 +22,70 @@ Route::get('/notre-societe', function () {
     return view('about');
 })->name('about');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
+
+
+Route::get('/dashboard', function (Request $request) {
+    $user = $request->user();
+
+    if ($user->hasRole('particulier')) {
+        if (!UserInfo::where('user_id', $user->id)->exists()) {
+            return redirect()->route('Getstarted.create');
+        }
+        return view('dashboard');
+    }
+
+    if ($user->hasRole('entreprise')) {
+        if (!Entreprise::where('user_id', $user->id)->exists()) {
+            return redirect()->route('GetstartedEntr.create');
+        }
+        return view('dashboard');
+    }
+
+    if ($user->hasRole('candidat')) {
+        if (!UserInfo::where('user_id', $user->id)->exists()) {
+            return redirect()->route('Getstartedcandidat.create');
+        }
+        return view('dashboard');
+    }
+
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/dashboard', function () {
+
+
+/* Route::get('/dashboard', function (Request $request) {
+    $user = $request->user();
+
+    $hasInfo = UserInfo::where('user_id', $user->id)->exists();
+    $hasInfoE = Entreprise::where('user_id', $user->id)->exists();
+
+    if (!$hasInfo) {
+        return redirect()->route('Getstarted.create');
+    } 
+
+    if (!$hasInfoE) {
+        return redirect()->route('GetstartedEntr.create');
+    }
+
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');  */
+
+ 
+
+
+
+
+
+
+
+/* Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');  */
+
+/* Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'ensure.userinfo'])->name('dashboard');
 
-
+ */
 
 Route::middleware('auth')->group(function () {
     Route::post('/check-email', [CheckController::class, 'check']);
@@ -85,8 +146,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/Getstarted', [GetstartedController::class, 'create'])->name('Getstarted.create');
     Route::post('/Getstarted', [GetstartedController::class, 'store'])->name('Getstarted.store');
+    Route::get('/GetstartedEntr', [GetstartedEntrController::class, 'create'])->name('GetstartedEntr.create');
+    Route::post('/GetstartedEntr', [GetstartedEntrController::class, 'store'])->name('GetstartedEntr.store');
     
-    
+    Route::get('/Getstartedcandidat', [GetstartedcandidatController::class, 'create'])->name('Getstartedcandidat.create');
+    Route::post('/Getstartedcandidat', [GetstartedcandidatController::class, 'store'])->name('Getstartedcandidat.store');
 });
 
 require __DIR__.'/auth.php';

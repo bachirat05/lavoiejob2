@@ -3,18 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Projet;
+use Illuminate\Http\Request;use App\Models\Projet;
 use App\Models\Status;
 use App\Models\UserInfo;
 
 
-class GetstartedController extends Controller
+class GetstartedcandidatController extends Controller
 {
     public function create(){
         $projets = Projet::orderByDesc('created_at')->get();
         $statuses = Status::orderBy('label')->get();
-        return view ('app.Getstarted', compact('projets', 'statuses'));
+        return view ('app.Getstartedcandidat', compact('projets', 'statuses'));
     }
    public function store(Request $request)
 {
@@ -27,7 +26,6 @@ class GetstartedController extends Controller
         'birth_city' => 'nullable|string|max:255',
         'nationality' => 'nullable|string|max:255',
         'birth_date' => 'nullable|date',            
-        'logement' => 'nullable|string|max:255',
         'city' => 'nullable|string|max:255',
         'address' => 'nullable|string|max:500', 
      	'reference'=> 'nullable|string|max:255',
@@ -37,10 +35,8 @@ class GetstartedController extends Controller
 
      	'whatsapp'=> 'nullable|string|max:255',
 		'marital'=> 'required|string|max:255',
-		'kids'=> 'nullable|string|max:255',
      	'religion'=> 'required|string|max:255',
      	'language'=> 'required|string|max:255',
-     	'animal'=> 'required|string|max:255',
      	'emergency_contact'=> 'nullable|string|max:255',
      	'sickness'=> 'nullable|string|max:255',
      	'studies_level'=> 'nullable|string|max:255',
@@ -66,8 +62,9 @@ class GetstartedController extends Controller
                 "redirect" => route('dashboard')
             ]);
 
-    //return redirect()->route('dashboard')->with('success', 'Votre demande a été enregistrée avec succès.');
+   
 }
 
   
 }
+

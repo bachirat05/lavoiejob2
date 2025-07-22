@@ -117,6 +117,15 @@
     <script src="{{ asset('assets/js/new_client_form_particulier.js')}}"></script>
     @elseif ( request()->routeIs('Getstarted.create'))
     <script src="{{ asset('assets/js/Getstarted.js')}}"></script>
+
+
+    @elseif ( request()->routeIs('GetstartedEntr.create'))
+    <script src="{{ asset('assets/js/GetstartedEntr.js')}}"></script>
+
+    @elseif ( request()->routeIs('Getstartedcandidat.create'))
+    <script src="{{ asset('assets/js/Getstartedcandidat.js')}}"></script>
+
+
     @elseif (request()->routeIs('user.edit'))
     <script src="{{ asset('assets/js/new_client_form_particulier_edit.js')}}"></script>
     @elseif (request()->routeIs('clients.new_entreprise'))
