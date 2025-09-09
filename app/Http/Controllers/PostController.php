@@ -20,6 +20,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
+
 
 class PostController extends Controller
 {
@@ -206,7 +208,62 @@ class PostController extends Controller
             ], 500);
         }
     }
-    
+    //demande
+    public function new_demande(Request $request)
+    {
+        // Validate the request
+        $request->validate([
+            'projet' => 'nullable|array',
+        ]);
+
+        $projetId = is_array($request->projet) ? $request->projet[0] : $request->projet;
+        $projet = Projet::find($projetId);
+
+
+        if (!$projet) {
+            return back()->with('error', 'Projet non trouvé.');
+        }
+
+        // Redirection selon le nom du projet
+        switch ($projet->name) {
+            case 'Lalla Lghalia':
+                return response()->json([
+                    'message' => 'Patientez..',
+                    "redirect" => route('demande_lallalghalia.create')
+                ]);
+
+            case 'PRO PRO':
+                return response()->json([
+                    'message' => 'Patientez..',
+                    "redirect" => route('demande_pro.create')
+                ]);
+
+            case 'Projet Gamma':
+                return redirect()->route('projets.gamma.form');
+
+            case 'Projet Delta':
+                return redirect()->route('projets.delta.form');
+
+            default:
+                return back()->with('error', 'Vue du projet non définie.');
+        }
+    }
+    //mettre a jour 
+    public function new_mettrejour_P(Request $request)
+    {
+        $user = Auth::user();
+        $userInfo = UserInfo::firstOrCreate(['user_id' => $user->id]);
+
+        $fieldsToUpdate = $request->only([
+            'tel', 'gsm', 'whatsapp', 'address', 'city',
+            'logement', 'religion', 'kids','marital',
+        
+        ]);
+
+        $userInfo->update($fieldsToUpdate);
+
+        return back()->with('success', 'Informations mises à jour avec succès.');
+    }
     //Projet
     public function new_projet(Request $request)
     {
@@ -921,4 +978,5 @@ class PostController extends Controller
     }
 
 
-}
+    
+    }

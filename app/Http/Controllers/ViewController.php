@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Fonction;
+use App\Models\Demande;
 use App\Models\Mode;
+use App\Models\UserInfo;
 use App\Models\Projet;
+use App\Models\Affectation;
 use App\Models\Status;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,10 +18,14 @@ use Spatie\Permission\Models\Role;
 
 class ViewController extends Controller
 {
-    public function permissions(): View
+    public function permissions()
     {
         $permissions = Permission::all();
         $roles = Role::all();
+
+        if(Auth::user()->getRoleName() != 'admin'){
+            return redirect('dashboard');
+        }
 
         return view('app.permissions', compact('permissions','roles'));
     }
@@ -27,6 +34,24 @@ class ViewController extends Controller
         $projets = Projet::with(['users.userInfo'])->orderByDesc('created_at')->get();
 
         return view('app.projets', compact('projets'));
+    }
+    public function demande(): View
+    {
+        $demandes = Demande::orderByDesc('created_at')->get();
+        $projets = Projet::orderBy('name')->get(); 
+        return view('app.demande', compact('demandes','projets'));
+    }
+    public function affectation(): View
+    {
+        $affectations = Affectation::orderByDesc('created_at')->get();
+        return view('app.affectation', compact('affectations'));
+    }
+    public function mettrejour_P()
+    {
+        $user = Auth::user();
+        $userInfo = UserInfo::where('user_id', $user->id)->first();
+
+        return view('app.mettrejour_P', compact('userInfo'));
     }
     public function fonctions(): View
     {

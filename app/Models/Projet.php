@@ -16,5 +16,10 @@ class Projet extends Model
     {
         return $this->belongsToMany(User::class, 'user_projets');
     }
-
+//
+     public function demandes()
+    {
+        return $this->hasMany(Demande::class);
+    }
+//
 }

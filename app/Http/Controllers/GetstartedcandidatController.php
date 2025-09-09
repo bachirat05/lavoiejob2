@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;use App\Models\Projet;
+use Illuminate\Http\Request;
+use App\Models\Projet;
 use App\Models\Status;
 use App\Models\UserInfo;
 

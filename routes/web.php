@@ -7,6 +7,10 @@ use App\Http\Controllers\ViewController;
 use App\Http\Controllers\GetstartedController;
 use App\Http\Controllers\GetstartedEntrController;
 use App\Http\Controllers\GetstartedcandidatController;
+use App\Http\Controllers\demande_lallalghaliaController;
+use App\Http\Controllers\DemandeProController;
+
+use App\Http\Controllers\demandeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Models\UserInfo;
@@ -125,6 +129,27 @@ Route::middleware('auth')->group(function () {
     Route::post('/systeme/projets-delete', [PostController::class, 'delete_projet'])->name('projets.destroy');
     Route::post('/systeme/projets-update', [PostController::class, 'update_projet'])->name('projets.update');
     
+    Route::get('/systeme/demande', [ViewController::class, 'demande'])->name('demande.view');
+    Route::post('/systeme/demande-create', [PostController::class, 'new_demande'])->name('demande.new');
+    Route::post('/systeme/demande-delete', [PostController::class, 'delete_demande'])->name('demande.destroy');
+    Route::post('/systeme/demande-update', [PostController::class, 'update_demande'])->name('demande.update');
+    
+    Route::get('/systeme/mettrejour_P', [ViewController::class, 'mettrejour_P'])->name('mettrejour_P.view');
+    Route::post('/systeme/mettrejour_P-create', [PostController::class, 'new_mettrejour_P'])->name('mettrejour_P.new');
+    Route::post('/systeme/mettrejour_P-delete', [PostController::class, 'delete_mettrejour_P'])->name('mettrejour_P.destroy');
+    Route::post('/systeme/mettrejour_P-update', [PostController::class, 'updateInfos'])->name('mettrejour_P.update');
+
+    Route::get('/systeme/reclamation', [ViewController::class, 'reclamation'])->name('reclamation.view');
+    Route::post('/systeme/reclamation-create', [PostController::class, 'new_reclamation'])->name('reclamation.new');
+    Route::post('/systeme/reclamation-delete', [PostController::class, 'delete_reclamation'])->name('reclamation.destroy');
+    Route::post('/systeme/reclamation-update', [PostController::class, 'update_reclamation'])->name('reclamation.update');
+
+    Route::get('/systeme/affectation', [ViewController::class, 'affectation'])->name('affectation.view');
+    Route::post('/systeme/affectation-create', [PostController::class, 'new_affectation'])->name('affectation.new');
+    Route::post('/systeme/affectation-delete', [PostController::class, 'delete_affectation'])->name('affectation.destroy');
+    Route::post('/systeme/affectation-update', [PostController::class, 'update_affectation'])->name('affectation.update');
+    
+    
     Route::get('/systeme/fonctions', [ViewController::class, 'fonctions'])->name('fonctions.view');
     Route::post('/systeme/fonctions-create', [PostController::class, 'new_fonction'])->name('fonctions.new');
     Route::post('/systeme/fonctions-bulk', [PostController::class, 'bulk_fonction'])->name('fonctions.bulk');
@@ -151,6 +176,15 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/Getstartedcandidat', [GetstartedcandidatController::class, 'create'])->name('Getstartedcandidat.create');
     Route::post('/Getstartedcandidat', [GetstartedcandidatController::class, 'store'])->name('Getstartedcandidat.store');
+
+    Route::get('/demande_lallalghalia', [demande_lallalghaliaController::class, 'create'])->name('demande_lallalghalia.create');
+    Route::post('/demande_lallalghalia', [demande_lallalghaliaController::class, 'store'])->name('demande_lallalghalia.store');
+
+    Route::get('/demande_pro', [DemandeProController::class, 'create'])->name('demande_pro.create');
+    Route::post('/demande_pro', [DemandeProController::class, 'store'])->name('demande_pro.store');
+
+    Route::get('/demande', [demandeController::class, 'create'])->name('demande.create');
+    Route::post('/demande', [demandeController::class, 'store'])->name('demande.store'); 
 });
 
 require __DIR__.'/auth.php';

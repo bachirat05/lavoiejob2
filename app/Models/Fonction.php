@@ -14,5 +14,10 @@ class Fonction extends Model
     {
         return $this->belongsToMany(Projet::class, 'projet_fonctions');
     }
-    
+//
+    public function demandes()
+    {
+        return $this->hasMany(Demande::class);
+    }
+//
 }

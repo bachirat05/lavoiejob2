@@ -52,7 +52,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function userinfo()
     {
-        return $this->hasOne(UserInfo::class);
+        return $this->hasOne(UserInfo::class, 'user_id');
     }
     public function entreprise()
     {
@@ -70,6 +70,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function projets()
     {
         return $this->belongsToMany(Projet::class, 'user_projets');
+    }
+
+    public function getRoleName()
+    {
+        return $this->getRoleNames()->first(); // returns first role or null
     }
 
 

@@ -125,6 +125,9 @@
     @elseif ( request()->routeIs('Getstartedcandidat.create'))
     <script src="{{ asset('assets/js/Getstartedcandidat.js')}}"></script>
 
+    @elseif ( request()->routeIs('demande_lallalghalia.create'))
+    <script src="{{ asset('assets/js/demande_lallalghalia.js')}}"></script>
+
 
     @elseif (request()->routeIs('user.edit'))
     <script src="{{ asset('assets/js/new_client_form_particulier_edit.js')}}"></script>
@@ -140,6 +143,7 @@
 
 
     <script src="{{ asset('assets/js/core.js')}}"></script>
+    @stack('scripts')
 
   </body>
 </html>
